@@ -26,16 +26,16 @@ source("GrabData.R")
 The data in the dataframe GSSdata is from the 2018 General Social Survey. The first blocks of R-code has selected down a subset of the data to just 16 variables. It has further removed unwanted factor levels in much of the data. Examine the code in the GrabData.R file to see what it is doing. Some of the variables are categorical and others are numerical. Be sure to do a variable analysis before tackling each question.  
 First question - Is opinion on the death penalty (CAPPUN) independent of gun ownership (OWNGUN)?
 
-$H_0$: Cappun is independent of owngun they are not related 
-$H_A$; T hey are dependent 
+$H_0$: Cappun is independent of owngun,they are not related  
+$H_A$: They are dependent 
 
 ## Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
 
-CSPPUN IS A categorical  variable,    
+CAPPUN IS A categorical  variable,    
 owngun is a  categorical variable,  
-so i use the cat~cat data helper file 
+so i use the cat~cat data helper file   
 ##Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
@@ -54,7 +54,7 @@ barchartGC(~CAPPUN + OWNGUN,data=GSSdata, type="percent")
 
 ```
 
-tHIS SHOWS
+This shows that if you don't own a gun you are more likely to get punishment rather then when you do own a gun 
 
 #### Numerical Descriptive Results
 
@@ -65,8 +65,7 @@ rowPerc(table1)
 colPerc(table1)
 ```
 
-
-tHIS TABLE SHOWS THAT 
+This shows that people who own a gun 75% are in favor then 57% who oppose.
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
@@ -74,6 +73,19 @@ tHIS TABLE SHOWS THAT
 ### Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+ The p value for chi-squared test was p=0.02022.This means we reject/fail to reject the null hypothesis, and conclude that opinion on Capital punishment (CAPPUN) is not independent of gun ownership(OWNGUN)
+ 
+ 
+The p-value for the fisher exact test was p=0.01651 and the odds ratio was 2.271  
+ 
+The odds ratio, 2.271:1 means that people who do not own a gun are 2.271 times more likely to oppose capital punishment
 
 #  Question 2
 
