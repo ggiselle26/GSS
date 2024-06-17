@@ -146,11 +146,18 @@ The p-value was 1.248 so this means we reject/fail to reject the null hypothesis
 
 <!--In this section you explain what you are trying to show.  Where did the data come from?  What is the research or other question you are trying to answer?!-->
 
-Determine if a persons performance on the wordsum test (WORDSUM) is independent of their level of schooling (DEGREE).
+Determine if a persons performance on the wordsum test (WORDSUM) is independent of their level of schooling (DEGREE).  
+
+ $H_0$: The performance of a persons test is independent of their level of schooling  
+ $H_A$: They are dependent  
 
 ## Methods
 
-<!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
+<!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!--> 
+
+WORDSUM is a categorical variable,  
+DEGREE is a categorical variable,  
+so i use the cat-cat data file
 
 ##Results
 
