@@ -93,9 +93,17 @@ The odds ratio, 2.271:1 means that people who do not own a gun are 2.271 times m
 
 Is there a difference in years of education (EDUC) between the those who did or did not vote in 2012 (VOTE12)?
 
+$H_0$: There is a difference in years of education between those who did or did not vote in 2012  
+$H_A$: There isn't a difference 
+
 ## Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
+
+ EDUC is categorical variable   
+ Vote12 is numerical variable   
+ I use the file Numerical~Cat data file  
+ 
 
 ##Results
 
@@ -107,11 +115,28 @@ Is there a difference in years of education (EDUC) between the those who did or 
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
-#### Numerical Descriptive Results
+```{r}
+plot(EDUC~VOTE12,data=GSSdata)
+```
+
+This shows that more people who voted in 2012 had more participation then the people who did not vote in 2012 and depending on the years of study it is more likely to have more people in higher education interested to vote.  
+
+#### Numerical Descriptive Results  
+
+```{r}
+favstats(EDUC~VOTE12,data=GSSdata)
+```
+
+This shows that people who voted12 has a higher mean of a 15.726 and people who did not vote in 12 has a mean of 13.420
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 ### Inferential Results
+
+```{r}
+t.test(EDUC~VOTE12,data=GSSdata)
+```
+
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
