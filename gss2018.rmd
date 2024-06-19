@@ -56,7 +56,7 @@ barchartGC(~OWNGUN + CAPPUN,data=GSSdata, type="percent")
 
 ```
 
- This graph shows that  people who own a gun shows that are more likely to favor capital punishment
+ This graph shows that  people who own a gun are more likely to favor capital punishment
  
  
 #### Numerical Descriptive Results
@@ -95,15 +95,15 @@ The p-value for the fisher exact test was p=0.01651 and we reject the null hypot
 
 Is there a difference in years of education (EDUC) between the those who did or did not vote in 2012 (VOTE12)?
 
-$H_0$: There is not a difference in years of education between those who did or did not vote in 2012 
+$H_0$: There is not a difference in years of education between those who did or did not vote in 2012   
 $H_A$:There is a difference
 
 ## Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
 
- EDUC is categorical variable   
- Vote12 is numerical variable   
+ EDUC is numerical  variable   
+ Vote12 is categorical variable   
  I use the file Numerical~Cat data file  
  
 
@@ -121,7 +121,7 @@ $H_A$:There is a difference
 plot(EDUC~VOTE12,data=GSSdata)
 ```
 
-This shows that more people who voted in 2012 had more participation then the people who did not vote in 2012 and depending on the years of study it is more likely to have more people in higher education interested to vote.  
+This shows that more people who voted in 2012 tend to have more education
 
 #### Numerical Descriptive Results  
 
@@ -129,7 +129,7 @@ This shows that more people who voted in 2012 had more participation then the pe
 favstats(EDUC~VOTE12,data=GSSdata)
 ```
 
-This shows that people who voted12 has a higher mean of a 15.726 and people who did not vote in 12 has a mean of 13.420
+This shows that people who voted12 has an average of 16 years of education and people who did not vote had 13 years of education
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
@@ -139,8 +139,9 @@ This shows that people who voted12 has a higher mean of a 15.726 and people who 
 t.test(EDUC~VOTE12,data=GSSdata)
 ```
 
-The p-value was 1.248 so this means we reject/fail to reject the null hypothesis of being no difference when there is  
- I conclude that the opinion on the difference in years of education between those who did or did not vote in 2012 is a variety because it does not equal to 0
+The  p-value is 0.0000001 so this means we reject the null hypothesis of because the p-value is smaller then 0.05
+
+ I conclude that there is a difference in years of education between those who did or did not vote in 2012  
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
@@ -150,17 +151,17 @@ The p-value was 1.248 so this means we reject/fail to reject the null hypothesis
 
 Determine if a persons performance on the wordsum test (WORDSUM) is independent of their level of schooling (DEGREE).  
 
- $H_0$: The performance of a persons test is independent of their level of schooling  
+ $H_0$: The score of a persons wordsum test is independent of their level of schooling  
  $H_A$: They are dependent  
 
 ## Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!--> 
 
-WORDSUM is a categorical variable,  
+WORDSUM is a numerical variable,  
 DEGREE is a categorical variable,  
-so I use the cat-cat data file
-
+so I use the num~cat data file
+ 
 ##Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
@@ -170,27 +171,44 @@ so I use the cat-cat data file
 #### Graphical Descriptive Results  
 
 ```{r}
-barchartGC(~WORDSUM + DEGREE,data=GSSdata)
-barchartGC(~WORDSUM + DEGREE,data=GSSdata, type="percent")
-
+boxplot(WORDSUM~DEGREE,data=GSSdata)
 ```
-
- This shows that depending on the degree of school high-schools have a better percentage then other degrees on their test  
-
+ 
+ This shows that there is a difference between the performance of a persons test and their levels of schooling 
+ 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 #### Numerical Descriptive Results
 
 ```{r}
-table1 <- xtabs(~WORDSUM + DEGREE, data=GSSdata)
-rowPerc(table1)
-colPerc(table1)
+favstats(WORDSUM~DEGREE,data=GSSdata)
 ```
  
-  This shows that
+ 
+  This shows that there is difference between lt highschool and the graduates because lt highschool is at a 7 and graduates at a 10
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 ### Inferential Results
+
+```{r}
+anova=aov(WORDSUM~DEGREE,data=GSSdata) 
+summary(anova)
+```
+  This shows that we reject the null because the p-value is 0.0000002 which is smaller then .05
+  
+```{r}
+#we specify the margins starting at the bottom and proceeding clockwise - thus 8.7 is the left side margin to hold the names of the factors
+par(mar = c(7, 8.7, 2, 2))
+plot(TukeyHSD(anova),las=2)
+```
+
+there is no difference between high school and less than high school. 
+There is a difference with jr college and high school.
+there is a difference with bachelors and high school  
+there is a difference between graduate and high school  
+there is no difference between high schools and graduate   
+No difference between jr college and graduate   
+No difference between bachelors and graduates   
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
@@ -200,4 +218,13 @@ colPerc(table1)
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
 
  
-#### Question 1: is gun ownership inepedent of the opinion on capial punishment. the summary results and the inferential results show tat they are not imdependent 
+#### Question 1: is gun ownership inepedent of the opinion on capial punishment  . 
+The summary results and the inferential results show that they are not independent 
+
+#### Question 2: Is there a difference in years of education (EDUC) between the those who did or did not vote in 2012 (VOTE12)?  
+In conclusion this in graphical results shows that more people who voted in 2012 tend to have more education  
+
+#### Question 3: Determine if a persons performance on the wordsum test (WORDSUM) is independent of their level of schooling (DEGREE).
+We determined in inferential results that there is a difference between the performance on the test and their level of schooling
+
+
