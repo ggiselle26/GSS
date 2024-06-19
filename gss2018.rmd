@@ -33,9 +33,11 @@ $H_A$: They are dependent
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
 
-CAPPUN IS A categorical  variable,    
+CPPUN IS A categorical  variable,    
 owngun is a  categorical variable,  
-so i use the cat~cat data helper file   
+so i use the cat~cat data helper file    
+we want CPPUN~ OWNGUN  
+
 ##Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
@@ -49,23 +51,24 @@ so i use the cat~cat data helper file
 
 
 ```{r}
-barchartGC(~CAPPUN + OWNGUN,data=GSSdata)
-barchartGC(~CAPPUN + OWNGUN,data=GSSdata, type="percent")
+barchartGC(~OWNGUN +CAPPUN ,data=GSSdata)
+barchartGC(~OWNGUN + CAPPUN,data=GSSdata, type="percent")
 
 ```
 
-This shows that if you don't own a gun you are more likely to get punishment rather then when you do own a gun 
-
+ This graph shows that  people who own a gun shows that are more likely to favor capital punishment
+ 
+ 
 #### Numerical Descriptive Results
 
 
 ```{r}
-table1 <- xtabs(~CAPPUN + OWNGUN,data=GSSdata)
+table1 <- xtabs(~OWNGUN + CAPPUN,data=GSSdata)
 rowPerc(table1)
 colPerc(table1)
 ```
 
-This shows that people who own a gun 75% are in favor then 57% who oppose.
+This shows that people who own a gun 75% are in favor then those who don't is 57% who oppose.
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
@@ -80,12 +83,11 @@ chisqtestGC(table1)
 fisher.test(table1)
 ```
 
- The p value for chi-squared test was p=0.02022.This means we reject/fail to reject the null hypothesis, and conclude that opinion on Capital punishment (CAPPUN) is not independent of gun ownership(OWNGUN)
+ The p value for chi-squared test was p=0.02022.This means we reject/fail to reject the null hypothesis, and conclude that the opinion on Capital punishment (CAPPUN) is not independent of gun ownership(OWNGUN) because its less then .05
  
  
-The p-value for the fisher exact test was p=0.01651 and the odds ratio was 2.271  
+The p-value for the fisher exact test was p=0.01651 and we reject the null hypothesis as with the chi- square test. The odds ratio was 2.3 times more likely to favor CAPPUN punishment then those who don't own 
  
-The odds ratio, 2.271:1 means that people who do not own a gun are 2.271 times more likely to oppose capital punishment
 
 #  Question 2
 
@@ -157,7 +159,7 @@ Determine if a persons performance on the wordsum test (WORDSUM) is independent 
 
 WORDSUM is a categorical variable,  
 DEGREE is a categorical variable,  
-so i use the cat-cat data file
+so I use the cat-cat data file
 
 ##Results
 
@@ -165,12 +167,27 @@ so i use the cat-cat data file
 
 ### Descriptive Results
 
-#### Graphical Descriptive Results
+#### Graphical Descriptive Results  
+
+```{r}
+barchartGC(~WORDSUM + DEGREE,data=GSSdata)
+barchartGC(~WORDSUM + DEGREE,data=GSSdata, type="percent")
+
+```
+
+ This shows that depending on the degree of school high-schools have a better percentage then other degrees on their test  
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 #### Numerical Descriptive Results
 
+```{r}
+table1 <- xtabs(~WORDSUM + DEGREE, data=GSSdata)
+rowPerc(table1)
+colPerc(table1)
+```
+ 
+  This shows that
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 ### Inferential Results
@@ -182,3 +199,5 @@ so i use the cat-cat data file
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
 
+ 
+#### Question 1: is gun ownership inepedent of the opinion on capial punishment. the summary results and the inferential results show tat they are not imdependent 
